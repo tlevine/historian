@@ -9,6 +9,7 @@ sqlite3() {
   if ! test -e readlink "${HISTORY_SYMLINK}" ; then
     (
       builtin cd "${HOME}"
+      mkdir -p "$HISTORY_DIRECTORY"
       ln -s "${HISTORY_FILE}" "${HISTORY_SYMLINK}"
     )
   elif ! test -L "${HISTORY_SYMLINK}" ; then
