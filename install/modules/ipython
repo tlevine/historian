@@ -12,6 +12,6 @@ elif test -e "$linkname"; then
   echo to
   echo "$target"
   exit 1
-else
+elif test -d ~/.ipython/profile_default; then
   ln -s "$target" "$linkname"
 fi
