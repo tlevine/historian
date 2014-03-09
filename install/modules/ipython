@@ -4,12 +4,14 @@ linkname=~/.ipython/profile_default/history.sqlite
 target=~/history/ipython.sqlite
 if test -f "$linkname" && ! test -e "$target"; then
   mv "$linkname" "$target"
-elif test -e "$target"; then
+elif test -L "$linkname" ; then
+  sleep 0
+elif test -e "$linkname"; then
   echo You need to manually link
   echo "$linkname"
   echo to
   echo "$target"
   exit 1
+else
+  ln -s "$target" "$linkname"
 fi
-
-ln -s "$linkname" "$target"

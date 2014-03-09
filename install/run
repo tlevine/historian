@@ -11,9 +11,6 @@ for file in install/modules/*; do
 done
 
 # Add things to the profile
-if test -e "$dotfile"; then
-  echo "$dotfile" already exists.
-  exit 1
-fi
-cp -R historian "$dotfile"
+mkdir -p "$dotfile"
+cp historian/sources/* "$dotfile"
 echo ". $dotfile/profile" >> ~/.profile
