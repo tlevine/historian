@@ -1,4 +1,4 @@
-HISTORY_DIRECTORY=~/safe/history/sqlite3
+HISTORY_DIRECTORY=~/history/sqlite3
 HISTORY_FILE=$HISTORY_DIRECTORY/$(date --rfc-3339 ns)
 HISTORY_SYMLINK="${HOME}/.sqlite_history"
 
@@ -9,7 +9,7 @@ sqlite3() {
   if ! test -e readlink "${HISTORY_SYMLINK}" ; then
     (
       builtin cd "${HOME}"
-      ln -s "${HISTORY_FILE}" .sqlite_history
+      ln -s "${HISTORY_FILE}" "${HISTORY_SYMLINK}"
     )
   elif ! test -L "${HISTORY_SYMLINK}" ; then
     echo You might want to delete your "$HISTORY_SYMLINK"
