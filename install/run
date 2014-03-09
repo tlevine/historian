@@ -7,7 +7,7 @@ mkdir -p "$historydir"
 
 # Run one-time configurations
 for file in install/modules/*; do
-  . "$file"
+  "$file"
 done
 
 # Add things to the profile

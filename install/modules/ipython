@@ -1,0 +1,15 @@
+#!/bin/sh
+set -e
+linkname=~/.ipython/profile_default/history.sqlite
+target=~/history/ipython.sqlite
+if test -f "$linkname" && ! test -e "$target"; then
+  mv "$linkname" "$target"
+elif test -e "$target"; then
+  echo You need to manually link
+  echo "$linkname"
+  echo to
+  echo "$target"
+  exit 1
+fi
+
+ln -s "$linkname" "$target"
