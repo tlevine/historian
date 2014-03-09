@@ -1,0 +1,2 @@
+# R history: One per POSIX shell, not one per R shell
+export R_HISTFILE="$HOME/history/r/$(date --rfc-3339 ns)"
