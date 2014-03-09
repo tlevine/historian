@@ -14,4 +14,4 @@ done
 mkdir -p "$dotfile/sources"
 cp historian/profile "$dotfile"
 cp historian/sources/* "$dotfile/sources"
-echo ". $dotfile/profile" >> ~/.profile
+# echo ". $dotfile/profile" >> ~/.profile
