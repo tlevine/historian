@@ -1,6 +1,4 @@
-# Sometimes do other things
-# ===========
-PROFILE_DIR="${HOME}/git/profile/source"
+PROFILE_DIR="${HOME}/.historian/sources"
 
 # Run only in an interactive  shell.
 [[ $- != *i* ]] && return
