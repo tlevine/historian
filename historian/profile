@@ -3,7 +3,7 @@ PROFILE_DIR="${HOME}/.historian/sources"
 # Run only in an interactive  shell.
 [[ $- != *i* ]] && return
 
-# Run only in a terminal (tty -s) and if it hasn't already been run.
+# Run only in a terminal (tty -s)
 for file in "${PROFILE_DIR}"/*; do
   . "$file"
 done
