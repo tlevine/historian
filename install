@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+dotfile=~/.historian
+
+# Make one-time symlinks
+for installer in installers/*; do
+  "$installer"
+done
+
+# Add things to the profile
+if test -e "$dotfile"; then
+  echo "$dotfile" already exists.
+  exit 1
+fi
+cp -R historian "$dotfile"
+echo ". $dotfile/profile" >> ~/.profile

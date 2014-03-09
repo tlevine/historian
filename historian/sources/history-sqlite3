@@ -1,0 +1,26 @@
+HISTORY_DIRECTORY=~/safe/history/sqlite3
+HISTORY_FILE=$HISTORY_DIRECTORY/$(date --rfc-3339 ns)
+HISTORY_SYMLINK="${HOME}/.sqlite_history"
+
+# Stamp after exit
+sqlite3() {
+
+  # Datestamped sqlite history
+  if ! test -e readlink "${HISTORY_SYMLINK}" ; then
+    (
+      builtin cd "${HOME}"
+      ln -s "${HISTORY_FILE}" .sqlite_history
+    )
+  elif ! test -L "${HISTORY_SYMLINK}" ; then
+    echo You might want to delete your "$HISTORY_SYMLINK"
+    echo so that the history fanciness can happen.
+    return 1
+  fi
+
+  # Run the command
+  env sqlite3 "$@"
+
+  # Remove the symlink
+  rm "${HISTORY_SYMLINK}"
+
+}

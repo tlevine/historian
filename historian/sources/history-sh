@@ -1,0 +1,19 @@
+# Too many commands of history per session
+export HISTSIZE=100000000000000000000
+
+# Ten gigabytes of maximum history size
+export HISTFILESIZE=10000000000
+
+# Save timestamps in the history.
+export HISTTIMEFORMAT="[%F %T %Z]" 
+
+# Save history to ~/.history/sh-date-host-randomnumber
+export HISTFILE="${HOME}/safe/$(date --rfc-3339 ns)"
+
+# Append continuously
+# http://ask.fedoraproject.org/question/18/how-to-keep-history-commands-in-sync-across
+_sync_history(){
+  builtin history -a
+  HISTFILESIZE=$HISTFILESIZE
+}
+PROMPT_COMMAND=_sync_history
