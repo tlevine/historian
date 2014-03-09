@@ -11,6 +11,7 @@ for file in install/modules/*; do
 done
 
 # Add things to the profile
-mkdir -p "$dotfile"
-cp historian/sources/* "$dotfile"
+mkdir -p "$dotfile/sources"
+cp historian/profile "$dotfile"
+cp historian/sources/* "$dotfile/sources"
 echo ". $dotfile/profile" >> ~/.profile
