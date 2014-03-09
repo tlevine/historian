@@ -1,10 +1,13 @@
 #!/bin/sh
 set -e
 dotfile=~/.historian
+historydir=~/history
 
-# Make one-time symlinks
-for installer in installers/*; do
-  "$installer"
+mkdir -p "$historydir"
+
+# Run one-time configurations
+for file in install/modules/*; do
+  . "$file"
 done
 
 # Add things to the profile
