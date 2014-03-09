@@ -6,16 +6,16 @@ HISTORY_SYMLINK="${HOME}/.sqlite_history"
 sqlite3() {
 
   # Datestamped sqlite history
-  if ! test -e readlink "${HISTORY_SYMLINK}" ; then
+  if test -L "${HISTORY_SYMLINK}" ; then
+    echo You might want to delete your "$HISTORY_SYMLINK"
+    echo so that the history fanciness can happen.
+    return 1
+  elif ! test -e "${HISTORY_SYMLINK}" ; then
     (
       builtin cd "${HOME}"
       mkdir -p "$HISTORY_DIRECTORY"
       ln -s "${HISTORY_FILE}" "${HISTORY_SYMLINK}"
     )
-  elif ! test -L "${HISTORY_SYMLINK}" ; then
-    echo You might want to delete your "$HISTORY_SYMLINK"
-    echo so that the history fanciness can happen.
-    return 1
   fi
 
   # Run the command
