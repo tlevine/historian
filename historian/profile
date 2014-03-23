@@ -1,4 +1,5 @@
-PROFILE_DIR="${HOME}/.historian/sources"
+# PROFILE_DIR="${HOME}/.historian/sources"
+PROFILE_DIR="${HOME}/git/historian/sources"
 
 # Run only in an interactive  shell.
 [[ $- != *i* ]] && return
