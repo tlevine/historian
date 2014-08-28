@@ -30,7 +30,7 @@ def session_date(session:str):
 def read_session(fp):
     'This keeps comments.'
     for line in fp:
-        line = line.rstrip('\n')
+        line = line.rstrip()
         if re.match(DATESTAMP, line):
             try:
                 yield command_date, command
@@ -39,6 +39,6 @@ def read_session(fp):
             command_date = datetime.datetime.fromtimestamp(int(line[1:]))
             command = ''
         else:
-            if line != '':
-                line += '\n'
+            if command != '':
+                command += '\n'
             command += line
