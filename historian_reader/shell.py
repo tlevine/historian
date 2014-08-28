@@ -1,4 +1,4 @@
-import shlex, datetime, os
+import datetime, os
 import re
 
 HISTORY = os.path.join(os.path.expanduser('~'), 'history', 'shell')
