@@ -17,7 +17,7 @@ def historian(directory = HISTORY, skip = []):
             'session_date': session_date(session),
         }
         with open(os.path.join(directory, session), 'r') as fp:
-            result['tokens'] = list(read_session(fp))
+            result['commands'] = list(read_session(fp))
         yield result
 
 def session_date(session:str):
@@ -29,14 +29,16 @@ def session_date(session:str):
 
 def read_session(fp):
     'This keeps comments.'
-    s = shlex.shlex(instream = fp, posix = True)
-    s.whitespace_split = True
-    s.commenters = ''
-
-    command_id = -1
-    for token in s:
-        if re.match(DATESTAMP, token):
-            command_date = datetime.datetime.fromtimestamp(int(token[1:]))
-            command_id += 1
+    for line in fp:
+        line = line.rstrip('\n')
+        if re.match(DATESTAMP, line):
+            try:
+                yield command_date, command
+            except NameError:
+                pass
+            command_date = datetime.datetime.fromtimestamp(int(line[1:]))
+            command = ''
         else:
-            yield command_id, command_date, token
+            if line != '':
+                line += '\n'
+            command += line
