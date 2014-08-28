@@ -16,7 +16,7 @@ def historian(directory = HISTORY, skip = []):
             'session_date': session_date(session),
         }
         with open(session, 'r') as fp:
-            result['commands'] = list(read_session(fp))
+            result['tokens'] = list(read_session(fp))
         yield result
 
 def session_date(session:str):
@@ -26,23 +26,16 @@ def session_date(session:str):
     '''
     return datetime.datetime.strptime(session.split('.')[0], '%Y-%m-%d %H:%M:%S')
 
-def split_commands(fp):
-    'This doesn\'t handle comments correctly.'
+def read_session(fp):
+    'This keeps comments.'
     s = shlex.shlex(instream = fp, posix = True)
     s.whitespace_split = True
     s.commenters = ''
 
+    command_id = -1
     for token in s:
         if len(token) == DATESTAMP_LENGTH:
-            try:
-                yield command_date, tokens
-            except NameError:
-                pass
+            command_id += 1
             command_date = datetime.datetime.fromtimestamp(int(token[1:]))
-            tokens = []
         else:
-            tokens.append(token)
-
-def read_session(fp):
-    for command_date, tokens in split_commands(fp):
-
+            yield command_id, command_date, token
