@@ -1,7 +1,8 @@
-import os
+import shlex, datetime, os
+import re
 
 HISTORY = os.path.join(os.path.expanduser('~'), 'history', 'shell')
-DATESTAMP_LENGTH = len('#1409184772')
+DATESTAMP = re.compile(r'^#[0-9]{10}$')
 
 def historian(directory = HISTORY, skip = []):
     '''
@@ -34,8 +35,8 @@ def read_session(fp):
 
     command_id = -1
     for token in s:
-        if len(token) == DATESTAMP_LENGTH:
-            command_id += 1
+        if re.match(DATESTAMP, token):
             command_date = datetime.datetime.fromtimestamp(int(token[1:]))
+            command_id += 1
         else:
             yield command_id, command_date, token
