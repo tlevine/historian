@@ -1,0 +1,18 @@
+#1408760839
+cd big/valsero/
+#1408760839
+ls
+#1408760854
+#mplayer -vo aa -monitoraspect
+#1408760855
+man mplayer
+#1408760881
+mplayer -vo aa -monitorpixelaspect 0.5 lettre-au-president.mp4 
+#1408762122
+mplayer -vo aa -monitorpixelaspect 0.5 reponds.mp4 
+#1408762383
+mplayer -vo aa -monitorpixelaspect 0.5 /tmp/All\ Your\ Base\ Are\ Belong\ To\ Us.mp4 
+#1408763228
+mplayer -vo aa -monitorpixelaspect 0.5 /tmp/All\ Your\ Base\ Are\ Belong\ To\ Us.mp4 
+#1408763752
+#mplayer -vo aa -monitorpixelaspect 0.5 /tmp/All\ Your\ Base\ Are\ Belong\ To\ Us.mp4 
