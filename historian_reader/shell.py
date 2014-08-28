@@ -10,13 +10,13 @@ def historian(directory = HISTORY, skip = []):
     already_read: Names of history files to skip (because they have
         already been processed)
     '''
-    sessions = sorted(set(os.listdir(HISTORY)).difference(skip))
+    sessions = sorted(set(os.listdir(directory)).difference(skip))
     for session in sessions:
         result = {
             'session': session,
             'session_date': session_date(session),
         }
-        with open(session, 'r') as fp:
+        with open(os.path.join(directory, session), 'r') as fp:
             result['tokens'] = list(read_session(fp))
         yield result
 
