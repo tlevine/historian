@@ -1,4 +1,5 @@
 import datetime
+import json, os
 
 import nose.tools as n
 
@@ -9,4 +10,8 @@ def test_session_date():
                    datetime.datetime(2014, 8, 28, 4, 0, 44))
 
 def test_read_session():
-def read_session(fp):
+    with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00') as fp:
+        observed = list(read_session(fp))
+    with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00.json') as fp:
+        expected = json.load(fp)
+    n.assert_list_equal(observed, expected)
