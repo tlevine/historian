@@ -1,5 +1,6 @@
 import datetime
-import json, os
+import os
+import csv
 
 import nose.tools as n
 
@@ -12,6 +13,14 @@ def test_session_date():
 def test_read_session():
     with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00')) as fp:
         observed = list(s.read_session(fp))
-    with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00.json')) as fp:
-        expected = json.load(fp)
+
+    with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00.csv'), 'w') as fp:
+        w = csv.writer(fp)
+        for a,b,c in observed:
+            w.writerow((a,int(b.timestamp()),c))
+
+    with open(os.path.join('historian_reader', 'test', 'fixtures', '2014-08-23 02:27:05.033008250+00:00.csv')) as fp:
+        expected = [(int(a),datetime.datetime.fromtimestamp(int(b)),c) \
+                    for (a,b,c) in csv.reader(fp)]
+
     n.assert_list_equal(observed, expected)
