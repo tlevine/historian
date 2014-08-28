@@ -12,6 +12,6 @@ done
 
 # Add things to the profile
 mkdir -p "$dotfile/sources"
-cp historian/profile "$dotfile"
-cp historian/sources/* "$dotfile/sources"
+cp historian_writer/profile "$dotfile"
+cp historian_writer/sources/* "$dotfile/sources"
 # echo ". $dotfile/profile" >> ~/.profile
