@@ -3,8 +3,8 @@ import csv
 
 import historian_reader.shell
 
-def main():
-    writer = csv.writer(sys.stdout)
+def main(fp = sys.stdout):
+    writer = csv.writer(fp)
     writer.writerow(('session','session_date','command_date','command'))
     try:
         for session in historian_reader.shell.historian():
