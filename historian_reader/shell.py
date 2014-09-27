@@ -1,24 +1,29 @@
 import datetime, os
 import re
+from functools import partial
+from concurrent.futures import ThreadPoolExecutor
 
 HISTORY = os.path.join(os.path.expanduser('~'), 'history', 'shell')
 DATESTAMP = re.compile(r'^#[0-9]{10}$')
 
-def historian(directory = HISTORY, skip = []):
+def historian(directory = HISTORY, skip = [], threads = 10):
     '''
     directory: Directory containing the shell history
     already_read: Names of history files to skip (because they have
         already been processed)
     '''
     sessions = sorted(set(os.listdir(directory)).difference(skip))
-    for session in sessions:
-        result = {
-            'session': session,
-            'session_date': session_date(session),
-        }
-        with open(os.path.join(directory, session), 'r') as fp:
-            result['commands'] = list(read_session(fp))
-        yield result
+    with ThreadPoolExecutor(threads) as e:
+        yield from e.map(partial(parse_session, directory), sessions)
+
+def parse_session(directory, session):
+    result = {
+        'session': session,
+        'session_date': session_date(session),
+    }
+    with open(os.path.join(directory, session), 'r') as fp:
+        result['commands'] = list(read_session(fp))
+    return result
 
 def session_date(session:str):
     '''
