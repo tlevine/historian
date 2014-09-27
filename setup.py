@@ -8,6 +8,6 @@ setup(name='historian',
       packages=['historian_reader'],
       tests_require = ['nose'],
       scripts = ['read-history'],
-      version='0.0.2',
+      version='0.0.3',
       license='AGPL',
 )
