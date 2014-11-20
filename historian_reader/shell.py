@@ -14,7 +14,8 @@ def historian(directory = HISTORY, skip = [], threads = 10):
     '''
     sessions = sorted(set(os.listdir(directory)).difference(skip))
     with ThreadPoolExecutor(threads) as e:
-        yield from e.map(partial(parse_session, directory), sessions)
+        for x in e.map(partial(parse_session, directory), sessions):
+            yield x # Python 2 support
 
 def parse_session(directory, session):
     result = {
@@ -25,7 +26,7 @@ def parse_session(directory, session):
         result['commands'] = list(read_session(fp))
     return result
 
-def session_date(session:str):
+def session_date(session):
     '''
     >>> session_date('2014-08-28 04:00:44.588995803+00:00')
     datetime.datetime(2014, 8, 28, 4, 0, 44)
