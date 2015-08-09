@@ -9,7 +9,7 @@ export HISTTIMEFORMAT="[%F %T %Z]"
 
 # Save history to ~/.history/sh-date-host-randomnumber
 mkdir -p "${HOME}/history/shell/"
-export HISTFILE="${HOME}/history/shell/$(date +%Y-%m-%d\ %H:%M:%S)"
+export HISTFILE="${HOME}/history/shell/$(date +%Y-%M-%dT%H:%M:%S)"
 
 # Append continuously
 # http://ask.fedoraproject.org/question/18/how-to-keep-history-commands-in-sync-across

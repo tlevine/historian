@@ -1,5 +1,5 @@
 HISTORY_DIRECTORY=~/history/sqlite3
-HISTORY_FILE=$HISTORY_DIRECTORY/$(date --rfc-3339 ns)
+HISTORY_FILE=$HISTORY_DIRECTORY/$(date +%Y-%M-%dT%H:%M:%S)
 HISTORY_SYMLINK="${HOME}/.sqlite_history"
 
 # Stamp after exit
